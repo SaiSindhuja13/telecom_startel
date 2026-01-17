@@ -25,5 +25,3 @@ if question:
 
 
 
-# city_df = pd.read_csv("llm_city_summary.csv")
-# st.bar_chart(city_df.set_index("city")["total_revenue"])
