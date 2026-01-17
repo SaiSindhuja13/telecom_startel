@@ -14,7 +14,7 @@ def load_data():
     df["billing_month_name"] = df["billing_month"].str.extract(r"([A-Za-z]+)")
     df["billing_year"] = df["billing_month"].str.extract(r"(\d{4})").astype(int)
 
-# (Optional) drop old column if you want
+
 # df = df.drop(columns=["billing_month"])
     df = df.drop(columns=["billing_month"], errors="ignore")
     df = df.rename(columns={"billing_month_name": "billing_month"})

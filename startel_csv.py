@@ -2,7 +2,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import regexp_extract, udf, col
 from pyspark.sql.types import StringType, DoubleType
 import pyspark.sql.functions as F
-import fitz  # PyMuPDF
+import fitz 
 
 spark = SparkSession.builder.appName("StartelInvoiceETL").getOrCreate()
 
@@ -92,7 +92,7 @@ final_df = (
     .withColumn("bill_due", F.col("usage_charges") + F.col("gst_amount"))
 )
 
-# ========= WRITE CSV =========
+# ===== WRITE CSV =========
 (
     final_df
     .coalesce(1)
