@@ -5,7 +5,7 @@ import pandas as pd
 # Load data
 # =========================================================
 def load_data():
-    output_s3_path = "s3://startel/output/startel_str_invoices.csv/part-*.csv"
+    output_s3_path = "s3://startel/startel_output_csv/part-*.csv"
 
     df = pd.read_csv(output_s3_path ,
     storage_options={"expand": True})
@@ -110,10 +110,6 @@ def load_data():
     customer_df = customer_revenue
     city_df = city_summary
 
-# def load_data():
-#     events_df = pd.read_csv("llm_base_events.csv")
-#     city_df = pd.read_csv("llm_city_summary.csv")
-#     customer_df = pd.read_csv("llm_customer_revenue.csv")
 
     return events_df, city_df, customer_df
 
@@ -160,7 +156,7 @@ def answer_analytical(question, events_df, city_df, customer_df):
         df = df[df["billing_year"] == year]
 
     # =====================================================
-    # 1️⃣ UPGRADE / DOWNGRADE (REAL, ROBUST)
+    # UPGRADE / DOWNGRADE (REAL, ROBUST)
     # =====================================================
     if "upgrade" in q or "downgrade" in q:
 
@@ -200,21 +196,21 @@ def answer_analytical(question, events_df, city_df, customer_df):
         return f"{df.shape[0]} customers {action}{suffix}."
 
     # =====================================================
-    # 2️⃣ LIST ALL CITIES
+    # LIST ALL CITIES
     # =====================================================
     if "city" in q and ("list" in q or "what all" in q or "all" in q):
         cities = sorted(city_df["city"].dropna().unique().tolist())
         return f"The cities are: {', '.join(cities)}"
 
     # =====================================================
-    # 3️⃣ TOTAL REVENUE (YEAR)
+    # TOTAL REVENUE (YEAR)
     # =====================================================
     if "total revenue" in q and year:
         total = df[amount_col].sum()
         return f"Total revenue in {year} is {total:.2f}"
 
     # =====================================================
-    # 4️⃣ HIGHEST REVENUE YEAR
+    # HIGHEST REVENUE YEAR
     # =====================================================
     if "highest revenue" in q or "max revenue" in q:
         yearly = events_df.groupby("billing_year")[amount_col].sum()
@@ -222,7 +218,7 @@ def answer_analytical(question, events_df, city_df, customer_df):
         return f"The highest revenue was in {y} with {yearly[y]:.2f}"
 
     # =====================================================
-    # 5️⃣ TOP CUSTOMER
+    # TOP CUSTOMER
     # =====================================================
     if "top customer" in q or "highest contributor" in q:
         top = customer_df.sort_values("total_paid", ascending=False).iloc[0]

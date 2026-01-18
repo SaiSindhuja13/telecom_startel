@@ -8,7 +8,7 @@ spark = SparkSession.builder.appName("StartelInvoiceETL").getOrCreate()
 
 # ========= INPUT / OUTPUT =========
 input_s3_path = "s3://startel/startel_invoices/"
-output_s3_path = "s3://startel/output/startel_str_invoices.csv"
+output_s3_path = "s3://startel/startel_output_csv/"
 
 # ========= READ PDF FILES =========
 pdf_df = (
