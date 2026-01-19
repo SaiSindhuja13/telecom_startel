@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Startel Assistant</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Startel Invoice Assistant</h1>
+
+    <div class="input-box">
+      <input
+        id="question"
+        type="text"
+        placeholder="Ask about invoices, usage charges, GST..."
+      />
+      <button id="askBtn" onclick="ask()">Ask</button>
+    </div>
+
+    <div id="loader" class="loader hidden">
+      🤔 Thinking...
+    </div>
+
+    <div class="response-box">
+      <pre id="response"></pre>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
